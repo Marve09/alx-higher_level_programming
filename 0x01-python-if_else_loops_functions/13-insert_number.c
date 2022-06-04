@@ -1,49 +1,58 @@
 #include "lists.h"
+/**
+ * create_node - creates a new node
+ * @n: int
+ * Return: address memory node
+ */
+listint_t *create_node(const int n)
+{
+	listint_t *n_node;
+
+	n_node = malloc(sizeof(listint_t));
+	if (n_node == NULL)
+		return (NULL);
+	n_node->n =  n;
+	n_node->next = NULL;
+	return (n_node);
+}
 
 /**
- * insert_node - inserts a new node
- * at a given position.
- * @head: head of a list.
- * @number: index of the list where the new node is
- * added.
- * Return: the address of the new node, or NULL if it
- * failed.
- */
+ * insert_node - thisinserts a number into a
+ * sorted singly linked list.
+ * @head: dkdk
+ * @number: djdjd
+ * Return: djdjdjd
+*/
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *new;
-	listint_t *h;
-	listint_t *h_prev;
+	listint_t *isrt_node, *tmp;
 
-	h = *head;
-	new = malloc(sizeof(listint_t));
-
-	if (new == NULL)
+	if (!head)
 		return (NULL);
-
-	while (h != NULL)
+	isrt_node = create_node(number);
+	if (!isrt_node)
+		return (NULL);
+	if ((*head) == NULL || isrt_node->n <= (*head)->n)
 	{
-		if (h->n > number)
-			break;
-		h_prev = h;
-		h = h->next;
-	}
-
-	new->n = number;
-
-	if (*head == NULL)
-	{
-		new->next = NULL;
-		*head = new;
+		isrt_node->next = *head;
+		*head = isrt_node;
+		return (isrt_node);
 	}
 	else
 	{
-		new->next = h;
-		if (h == *head)
-			*head = new;
-		else
-			h_prev->next = new;
-	}
+		tmp = *head;
+		for (; tmp;)
+		{
+			if (tmp->next == NULL ||
+			(isrt_node->n >= tmp->n && isrt_node->n <= tmp->next->n))
+			{
+				isrt_node->next = tmp->next;
+				tmp->next = isrt_node;
+				return (isrt_node);
+			}
+			tmp = tmp->next;
 
-	return (new);
+		}
+	}
+	return (NULL);
 }
