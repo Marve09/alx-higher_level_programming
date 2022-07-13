@@ -123,4 +123,4 @@ Jquery
 ---
 
 ## Author
-* **Miguel Palacios** - [MiguelP4lacios](https://github.com/MiguelP4lacios)
+* **Marvelous Ohaeri** - [Marve09](https://github.com/Marve09)
