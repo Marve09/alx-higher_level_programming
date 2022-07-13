@@ -1,19 +1,18 @@
-#!/usr/bin/python3"
-"""Module that comvert str a object
+#!/usr/bin/python3
+"""
+Module 6-from_json_string
 
-Returns:
-        [type]: object
+Contains function that returns python data structure from JSON string
 """
 
 
-import json
-
-
 def from_json_string(my_str):
-        """[summary]
+    """Returns python data structure from JSON string
+    Args:
+        my_str: json string representation
+    Return:
+        python object
+    """
+    import json
 
-        Args:
-            my_str ([type]): str_object
-
-        """
-        return json.loads(my_str)
+    return json.loads(my_str)

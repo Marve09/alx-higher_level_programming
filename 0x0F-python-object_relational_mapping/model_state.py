@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Model states
+"""
+Defines class State
 """
 
 from sqlalchemy import Column, Integer, String
@@ -9,16 +10,10 @@ Base = declarative_base()
 
 
 class State(Base):
-    """State class
-
-    Args:
-        Base (class): basic class
     """
-    __tablename__ = 'states'
-    id = Column(Integer,
-                primary_key=True,
-                autoincrement=True,
-                unique=True,
-                nullable=True)
-    name = Column(String(128),
-                  nullable=True)
+    Class State; instance of Base
+    Linked to MySQL table "states"
+    """
+    __tablename__ = "states"
+    id = Column(Integer, nullable=False, primary_key=True)
+    name = Column(String(128), nullable=False)

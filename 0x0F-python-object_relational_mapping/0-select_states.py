@@ -1,26 +1,25 @@
 #!/usr/bin/python3
-"""Module 0_select_states
 """
+return all table values (table 'states')
+parameters given to script: username, password, database
+"""
+
 import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
 
-    username = argv[1]
-    password = argv[2]
-    database = argv[3]
-
+    # connect to database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database,
-                         charset="utf8")
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    query = db.cursor()
-
-    query.execute("SELECT * FROM states ORDER BY id ASC;")
-    for row in query.fetchall():
+    # create cursor to exec queries using SQL
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
+    for row in cursor.fetchall():
         print(row)
-    query.close()
+    cursor.close()
     db.close()

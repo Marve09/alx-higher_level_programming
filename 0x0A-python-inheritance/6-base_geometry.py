@@ -1,16 +1,17 @@
 #!/usr/bin/python3
-"""Module
+"""
+Module 6-base_geometry
 
-Raises:
-    Exception: [description]
+Contains empty class BaseGeometry
+with public instance method area
 """
 
 
-class BaseGeometry():
-        """Class
-        """
-
-        def area(self):
-                """Method
-                """
-                raise Exception("area() is not implemented")
+class BaseGeometry:
+    """
+    Methods:
+        area(self)
+    """
+    def area(self):
+        """not implemented"""
+        raise Exception("area() is not implemented")

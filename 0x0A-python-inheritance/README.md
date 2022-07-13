@@ -1,81 +1,34 @@
-# 0x0A. Python - Inheritance
+## Python - Inheritance
+> Each file in this repository holds code that illustrates an essential concept of programming,
+> specific to the Python programming language:
+> superclass, baseclass, and subclasses; utilizing parent classes' attributes and methods;
+> overwriting parent classes' methods
 
-## Resources:books:
-Read or watch:
-* [Inheritance](https://intranet.hbtn.io/rltoken/E2Bs3bxX8GuSEKuWqswU7g)
-* [Multiple inheritance](https://intranet.hbtn.io/rltoken/auwnZOKkBZ97JaLtrMryuA)
-* [Inheritance in Python](https://intranet.hbtn.io/rltoken/ycewwwPmDpXqRp2R1FW51w)
-* [Learn to Program 10 : Inheritance Magic Methods](https://intranet.hbtn.io/rltoken/F8LUzmvPI4yur1Z37ZM1fQ)
+### Description of what each file shows:
+* main_files ----- folder holds main programs to showcase examples of how to use functions
+* tests ---------- folder holds tests and edge cases checking
+* Files that start with:
+0. function that returns list of attributes and methods of object
+1. class that inherits from list and prints sorted list
+2. function using type() - same object
+3. function using isinstance() - same class inherited from
+4. function using issubclass() - only subclass of
+5. empty class BaseGeometry (so next questions can build on this one)
+6. add area method that's empty
+7. add integer_validator method
+8. class Rectangle that inherits BaseGeometry; initializes private width, height
+9. implement __str__ to print
+10. class Square that inherits Rectangle; initialize size and use area
+11. implement area and print
+100. 100- class MyInt that inherits from int; inverts == and != operations
+101. 101- set attribute to object if possible
 
+### Environment
+* Language: Python 3.4.3
+* OS: Ubuntu 14.04 LTS
+* Compiler: python3
+* Style guidelines: [PEP 8 (version 1.7)](https://www.python.org/dev/peps/pep-0008/) || [Google Style Python Docstrings](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)   
 ---
-## Learning Objectives:bulb:
-What you should learn from this project:
+### Authors
+Melissa Ng [![M](https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/30px-Twitter_Bird.svg.png)](https://twitter.com/MelissaNg__)
 
-* Why Python programming is awesome (don’t forget to tweet today, with the hashtag #pythoniscool :))
-* What is a superclass, baseclass or parentclass
-* What is a subclass
-* How to list all attributes and methods of a class or instance
-* When can an instance have new attributes
-* How to inherit class from another
-* How to define a class with multiple base classes 
-* What is the default class every class inherit from
-* How to override a method or attribute inherited from the base class
-* Which attributes or methods are available by heritage to subclasses
-* What is the purpose of inheritance
-* What are, when and how to use isinstance, issubclass, type and super built-in functions
-
----
-
-### [0. Lookup](./0-lookup.py)
-* Write a function that returns the list of available attributes and methods of an object:
-
-
-### [1. My list](./1-my_list.py)
-* Write a class MyList that inherits from list:
-
-
-### [2. Exact same object](./2-is_same_class.py)
-* Write a function that returns True if the object is exactly an instance of the specified class ; otherwise False.
-
-
-### [3. Same class or inherit from](./3-is_kind_of_class.py)
-* Write a function that returns True if the object is an instance of, or if the object is an instance of a class that inherited from, the specified class ; otherwise False.
-
-
-### [4. Only sub class of](./4-inherits_from.py)
-* Write a function that returns True if the object is an instance of a class that inherited (directly or indirectly) from the specified class ; otherwise False.
-
-
-### [5. Geometry module](./5-base_geometry.py)
-* Write an empty class BaseGeometry.
-
-
-### [6. Improve Geometry](./6-base_geometry.py)
-* Write a class BaseGeometry (based on 5-base_geometry.py).
-
-
-### [7. Integer validator](./7-base_geometry.py)
-* Write a class BaseGeometry (based on 6-base_geometry.py).
-
-
-### [8. Rectangle](./8-rectangle.py)
-* Write a class Rectangle that inherits from BaseGeometry (7-base_geometry.py).
-
-
-### [9. Full rectangle](./9-rectangle.py)
-* Write a class Rectangle that inherits from BaseGeometry (7-base_geometry.py).
-(task based on 8-rectangle.py)
-
-
-### [10. Square #1](./10-square.py)
-* Write a class Square that inherits from Rectangle (9-rectangle.py):
-
-
-### [11. Square #2](./11-square.py)
-* Write a class Square that inherits from Rectangle (9-rectangle.py).
-(task based on 10-square.py).
-
----
-
-## Author
-* **Miguel Palacios** - [MiguelP4lacios](https://github.com/MiguelP4lacios)

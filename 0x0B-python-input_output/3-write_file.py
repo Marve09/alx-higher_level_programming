@@ -1,14 +1,12 @@
 #!/usr/bin/python3
-"""Module that read a file and print your content
+"""
+Module 3-write_file
+
+Contains function that writes to text file and returns num chars written
 """
 
 
 def write_file(filename="", text=""):
-        """Function that write a file
-        Args:
-            filename (str, optional): path file. Defaults to "".
-            text (str, optional): content. Defaults to "".
-        """
-
-        with open(filename, mode='w', encoding='utf-8') as afile:
-                return (afile.write(text))
+    """writes to text file and returns num chars written"""
+    with open(filename, mode="w", encoding="utf-8") as f:
+        return(f.write(text))

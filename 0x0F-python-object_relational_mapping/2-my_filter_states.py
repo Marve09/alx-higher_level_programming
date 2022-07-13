@@ -1,32 +1,29 @@
 #!/usr/bin/python3
-"""Module 2_my_filter_states
 """
+return matching states
+parameters given to script: username, password, database, state to match
+"""
+
 import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
 
-    username = argv[1]
-    password = argv[2]
-    database = argv[3]
-    searched = argv[4]
-
+    # connect to database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database,
-                         charset="utf8")
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    query = db.cursor()
-
-    query.execute(
-        "SELECT * FROM states\
-        WHERE name LIKE BINARY '{}'\
-        ORDER BY id ASC".format(searched))
-
-    for row in query.fetchall():
-        print(row)
-
-    query.close()
+    # create cursor to exec queries using SQL; match arg given
+    cursor = db.cursor()
+    sql_cmd = """SELECT *
+                 FROM states
+                 WHERE name LIKE '{:s}' ORDER BY id ASC""".format(argv[4])
+    cursor.execute(sql_cmd)
+    for row in cursor.fetchall():
+        if row[1] == argv[4]:
+            print(row)
+    cursor.close()
     db.close()

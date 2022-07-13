@@ -1,102 +1,74 @@
-The ``1-my_list`` module
-======================
+# run test with python3 -m doctest -v ./tests/[filename].txt
 
-Using ``MyList``
--------------------
+First import method to test
+>>> MyList = __import__('1-my_list').MyList
 
-This is an test text file in reStructuredText format.  First import
-``MyList`` from the ``1-my_list`` module:
+SUCCESS CASES:
 
-    >>> MyList = __import__('1-my_list').MyList
+Test ints (program assumes all elements will be type int):
+     >>> my_list = MyList()
+     >>> my_list.append(3)
+     >>> my_list.append(50)
+     >>> my_list.append(-1)
+     >>> print(my_list)
+     [3, 50, -1]
+     >>> my_list.print_sorted()
+     [-1, 3, 50]
+     >>> print(my_list)
+     [3, 50, -1]
 
-Now use it:
+     >>> another_list = MyList()
+     >>> another_list.append(300)
+     >>> another_list.append(50)
+     >>> another_list.append(-1)
+     >>> print(another_list)
+     [300, 50, -1]
+     >>> another_list.print_sorted()
+     [-1, 50, 300]
+     >>> print(another_list)
+     [300, 50, -1]
 
-        >>> issubclass(MyList, list)
-        True
+     >>> l = MyList()
+     >>> l.append(-300)
+     >>> l.append(50)
+     >>> l.append(-1)
+     >>> print(l)
+     [-300, 50, -1]
+     >>> id(l) is not id(l.print_sorted())
+     [-300, -1, 50]
+     True
 
-        >>> type(MyList)
-        <class 'type'>
+Test list with only one element:
+     >>> solo = MyList()
+     >>> solo.append(-99999)
+     >>> print(solo)
+     [-99999]
+     >>> solo.print_sorted()
+     [-99999]
+     >>> print(solo)
+     [-99999]
 
-        >>> '__init__' in dir(MyList)
-        True
+Test list with no elements:
+     >>> empty = MyList()
+     >>> print(empty)
+     []
+     >>> empty.print_sorted()
+     []
 
-        >>> 'print_sorted' in dir(MyList)
-        True
+Test type, isinstance, issubclass:
+     >>> type(MyList())
+     <class '1-my_list.MyList'>
 
-        >>> '__str__' in dir(MyList)
-        True
+     >>> isinstance(MyList, object)
+     True
 
-        >>> '__repr__' in dir(MyList)
-        True
+     >>> isinstance(MyList, list)
+     False
 
-        >>> 'fromkeys' in dir(MyList)
-        False
+     >>> issubclass(MyList, list)
+     True
 
-        >>> my_dic = {1:"hola", 2:[2, 3], 3:(1, 2)}
-        >>> MyList(my_dic)
-        [1, 2, 3]
+     >>> 'print_sorted' in dir(MyList)
+     True
 
-        >>> my_list = MyList(1, 3, 4)
-        Traceback (most recent call last):
-        TypeError: list() takes at most 1 argument (3 given)
-        
-        >>> my_list = MyList([1, 3, 2, 5, 4])
-        >>> print(my_list)
-        [1, 3, 2, 5, 4]
-
-        >>> my_list.print_sorted()
-        [1, 2, 3, 4, 5]
-
-        >>> my_list = MyList()
-        >>> my_list.append(1)
-        >>> my_list.append(4)
-        >>> my_list.append(2)
-        >>> my_list.append(3)
-        >>> my_list.append(5)
-        >>> print(my_list)
-        [1, 4, 2, 3, 5]
-        >>> my_list.print_sorted()
-        [1, 2, 3, 4, 5]
-        >>> print(my_list)
-        [1, 4, 2, 3, 5]
-
-        >>> my_list = MyList()
-        >>> my_list.append(1)
-        >>> my_list.append(4)
-        >>> my_list.append(-2)
-        >>> my_list.append(3)
-        >>> my_list.append(-5)
-        >>> my_list.print_sorted()
-        [-5, -2, 1, 3, 4]
-
-        >>> my_list = MyList()
-        >>> my_list.append(7)
-        >>> my_list.append('Miguel')
-        >>> my_list.append(2)
-        >>> my_list.append(3)
-        >>> my_list.append(5)
-        >>> my_list.print_sorted()
-        Traceback (most recent call last):
-        TypeError: unorderable types: str() < int()
-
-        >>> my_list = MyList()
-        >>> my_list.append('c')
-        >>> my_list.append('a')
-        >>> my_list.append('b')
-        >>> my_list.print_sorted()
-        ['a', 'b', 'c']
-
-        >>> MyList.print_sorted([1, 2, 4, 3])
-        [1, 2, 3, 4]
-
-        >>> MyList.print_sorted([])
-        []
-
-        >>> my_list = []
-        >>> my_list.print_sorted()
-        Traceback (most recent call last):
-        AttributeError: 'list' object has no attribute 'print_sorted'
-
-        >>> my_list = MyList()
-        >>> my_list.print_sorted()
-        []
+FAIL CASES:

@@ -1,32 +1,30 @@
 #!/usr/bin/python3
-"""Module 3_my_safe_filter_states
 """
+return matching states; safe from MySQL injections
+# http://bobby-tables.com/python
+parameters given to script: username, password, database, state to match
+"""
+
 import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
 
-    username = argv[1]
-    password = argv[2]
-    database = argv[3]
-    searched = argv[4]
-
+    # connect to database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database,
-                         charset="utf8")
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    query = db.cursor()
+    # create cursor to exec queries using SQL; match arg given
+    cursor = db.cursor()
+    sql_cmd = """SELECT *
+                 FROM states
+                 WHERE name=%s ORDER BY id ASC"""
+    cursor.execute(sql_cmd, (argv[4],))
 
-    query.execute(
-        "SELECT * FROM states\
-        WHERE name = %(searched)s\
-        ORDER BY id ASC",
-        {'searched': searched})
-
-    for row in query.fetchall():
+    for row in cursor.fetchall():
         print(row)
-    query.close()
+    cursor.close()
     db.close()

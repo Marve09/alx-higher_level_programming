@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-"""Module that coverte a object-python to str-JSON in a
-   jsonfile
+"""
+Module 7-save_to_json_file
+
+Contains function that writes Python obj to file using JSON represenation
 """
 
 
-import json
-
-
 def save_to_json_file(my_obj, filename):
-        """Function that save to json file
+    """Writes Python obj to file using JSON represenation
+    Args:
+        my_obj: python object
+        filename: file
+    """
+    import json
 
-        Args:
-            my_obj ([type]): object-python
-            filename ([type]): name of jsonfile
-        """
-        with open(filename, mode='w', encoding='utf-8') as afileJSON:
-                json.dump(my_obj, afileJSON)
+    with open(filename, mode="w", encoding="utf-8") as f:
+        json.dump(my_obj, f)

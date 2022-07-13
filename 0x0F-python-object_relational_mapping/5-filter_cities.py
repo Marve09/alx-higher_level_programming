@@ -1,33 +1,32 @@
 #!/usr/bin/python3
-"""Module 4_cities_by_states
 """
+return cities that are in the state given (tables 'cities' 'states)
+parameters given to script: username, password, database, state
+"""
+
 import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
 
-    username = argv[1]
-    password = argv[2]
-    database = argv[3]
-    state = argv[4]
+    # connect to database
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=username, passwd=password,
-                         db=database, charset="utf8")
+    # create cursor to exec queries using SQL; join two tables for all info
+    cursor = db.cursor()
+    sql_cmd = """SELECT cities.name
+                 FROM states
+                 INNER JOIN cities ON states.id = cities.state_id
+                 WHERE states.name LIKE %s
+                 ORDER BY cities.id ASC"""
+    cursor.execute(sql_cmd, (argv[4], ))
 
-    query = db.cursor()
+    # format the printing of cities of same state separated by commas
+    print(', '.join(["{:s}".format(row[0]) for row in cursor.fetchall()]))
 
-    query.execute(
-        "SELECT cities.name\
-        FROM cities\
-        INNER JOIN states on cities.state_id = states.id\
-        WHERE states.name=%(state)s\
-        ORDER BY cities.id ASC;", {'state': state})
-
-    _list = []
-    for row in query.fetchall():
-        _list.append(row[0])
-
-    print(", ".join(_list))
-    query.close()
+    cursor.close()
     db.close()

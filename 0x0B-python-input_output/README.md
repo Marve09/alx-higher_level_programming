@@ -1,94 +1,36 @@
-# 0x0B. Python - Input/Output
+## Python - Input/Output
+> Each file in this repository holds code that illustrates an essential concept of programming,
+> specific to the Python programming language:
+> opening files and safely closing them using "with", writing and appending,
+> reading entire file versus reading by lines, and importing and utilizing json
 
-## Resources:books:
-Read or watch:
-* [7.2. Reading and Writing Files](https://intranet.hbtn.io/rltoken/c5ypFfQwcM-SZ-7tr3WuxA)
-* [8.7. Predefined Clean-up Actions](https://intranet.hbtn.io/rltoken/1wqMFejKqBva-Lxws0lftw)
-* [Dive Into Python 3: Chapter 11. Files](https://intranet.hbtn.io/rltoken/8aSPOpBZj9B1DB6GfoEWfg)
-* [JSON encoder and decoder](https://intranet.hbtn.io/rltoken/XBqM3BrA_rUBw6DXw4X98Q)
-* [Learn to Program 8 : Reading / Writing Files](https://intranet.hbtn.io/rltoken/derf9VLFVDnSgX2n-drwnw)
-* [Automate the Boring Stuff with Python](https://intranet.hbtn.io/rltoken/Y77h8aeRoljlN643yKfdTg)
+### Description of what each file shows:
+* main_files ----- folder holds main programs to showcase examples of how to use functions
+* Files that start with:
+0. reads a text file (UTF8) and prints it to stdout
+1. function that returns the number of lines of a text file
+2. function that reads n lines of text file; prints it to stdout
+3. function that writes a str to text file; returns num of chars written
+4. function that appends str to end of txt file; returns num of chars added
+5. function that returns the JSON representation of an object (string)
+6. function that returns an object (Python data structure) from JSON string
+7. writes an Object to a text file, using a JSON representation
+8. creates an Object from a JSON file
+9. script that adds all arguments to a Python list, thens save them to a file
+10. returns the dictionary description with simple data structure ```obj.__dict__```
+11. class Student that retrieves dictionary representation of student instance
+12. build on #11 and return dictionary of attributes asked
+13. build on #12 and transfer all of one instances attributes to another
+14. [Pascal's triangle] - function that returns a list of lists of ints
+15. 100- func searches for lines that contain specific str and inserts txt
+16. 101- script that reads stdin line by line and computes metrics
 
+### Environment
+* Language: Python 3.4.3
+* OS: Ubuntu 14.04 LTS
+* Compiler: python3
+* Style guidelines: [PEP 8 (version 1.7)](https://www.python.org/dev/peps/pep-0008/) || [Google Style Python Docstrings](http://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)   
 ---
-## Learning Objectives:bulb:
-What you should learn from this project:
+### Authors
+Melissa Ng [![M](https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/30px-Twitter_Bird.svg.png)](https://twitter.com/MelissaNg__)
 
-* Why Python programming is awesome (don’t forget to tweet today, with the hashtag #pythoniscool :))
-* How to open a file
-* How to write text in a file
-* How to read the full content of a file 
-* How to read a file line by line
-* How to move the cursor in a file
-* How to make sure a file is closed after using it
-* What is and how to use the with statement
-* What is JSON
-* What is serialization
-* What is deserialization
-* How to convert a Python data structure to a JSON string 
-* How to convert a JSON string to a Python data structure
-
----
-
-### [0. Read file](./0-read_file.py)
-* Write a function that reads a text file (UTF8) and prints it to stdout:
-
-
-### [1. Number of lines](./1-number_of_lines.py)
-* Write a function that returns the number of lines of a text file:
-
-
-### [2. Read n lines](./2-read_lines.py)
-* Write a function that reads n lines of a text file (UTF8) and prints it to stdout:
-
-
-### [3. Write to a file](./3-write_file.py)
-* Write a function that writes a string to a text file (UTF8) and returns the number of characters written:
-
-
-### [4. Append to a file](./4-append_write.py)
-* Write a function that appends a string at the end of a text file (UTF8) and returns the number of characters added:
-
-
-### [5. To JSON string](./5-to_json_string.py)
-* Write a function that returns the JSON representation of an object (string):
-
-
-### [6. From JSON string to Object](./6-from_json_string.py)
-* Write a function that returns an object (Python data structure) represented by a JSON string:
-
-
-### [7. Save Object to a file](./7-save_to_json_file.py)
-* Write a function that writes an Object to a text file, using a JSON representation:
-
-
-### [8. Create object from a JSON file](./8-load_from_json_file.py)
-* Write a function that creates an Object from a “JSON file”:
-
-
-### [9. Load, add, save](./9-add_item.py)
-* Write a script that adds all arguments to a Python list, and then save them to a file:
-
-
-### [10. Class to JSON](./10-class_to_json.py)
-* Write a function that returns the dictionary description with simple data structure (list, dictionary, string, integer and boolean) for JSON serialization of an object:
-
-
-### [11. Student to JSON](./11-student.py)
-* Write a class Student that defines a student by:
-
-
-### [12. Student to JSON with filter](./12-student.py)
-* Write a class Student that defines a student by: (based on 11-student.py)
-
-
-### [13. Student to disk and reload](./13-student.py)
-* Write a class Student that defines a student by: (based on 12-student.py)
-
-
-### [14. Pascal's Triangle](./14-pascal_triangle.py)
-* Technical interview preparation: 
-
----
-
-## Author
-* **Miguel Palacios** - [MiguelP4lacios](https://github.com/MiguelP4lacios)

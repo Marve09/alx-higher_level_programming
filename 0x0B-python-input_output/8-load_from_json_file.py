@@ -1,22 +1,17 @@
 #!/usr/bin/python3
-"""Module that coverte a str-JSON form
-   jsonfile to object-python
+"""
+Module 8-load_from_json_file
 
-Returns:
-    [type]: object-python
+Contains function that creates a Python obj from JSON file
 """
 
 
-import json
-
-
 def load_from_json_file(filename):
-        """Function that load from joson file
+    """Creates a Python obj from JSON file
+    Args:
+        filename: file
+    """
+    import json
 
-        Args:
-            filename ([type]): [description]
-
-        """
-
-        with open(filename, encoding='utf-8') as aJsonFile:
-                return json.load(aJsonFile)
+    with open(filename, mode="r", encoding="utf-8") as f:
+        return json.load(f)

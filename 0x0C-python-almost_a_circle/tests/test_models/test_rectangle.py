@@ -1,211 +1,154 @@
 #!/usr/bin/python3
+"""
+Unittest for Rectangle Class
+# run with python3 -m unittest discover tests
+# run with python3 -m unittest tests/test_models/test_rectangle.py
+"""
 
-from models.rectangle import Rectangle
+
+import os
+import pep8
 import unittest
-
-
-class TestRectangleId(unittest.TestCase):
-
-        def test_Rectangle_id_1(self):
-
-                obj1 = Rectangle(width=6, height=54)
-                self.assertEqual(obj1.id, 3)
-
-        def test_Rectangle_id_2(self):
-
-                obj2 = Rectangle(height=2, width=2)
-                self.assertEqual(obj2.id, 4)
-
-        def test_Rectangle_id_negative(self):
-
-                obj2 = Rectangle(height=2, width=2, id=-3)
-                self.assertEqual(obj2.id, -3)
-
-        def test_Rectangle_id_any(self):
-
-                obj = Rectangle(2, 4, 0, 0, 15)
-                self.assertEqual(obj.id, 15)
-
-
-class TestRectangleValidation(unittest.TestCase):
-
-        def test_not_argument(self):
-
-                with self.assertRaises(TypeError):
-                        obj = Rectangle()
-
-        def test_more_than_five_argument(self):
-
-                with self.assertRaises(TypeError):
-                        obj = Rectangle(3, 4, 3, 4, 4, 5)
-
-        def test_width_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE = Rectangle("hola", 3)
-
-        def test_height_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE_1 = Rectangle(6, "betty")
-
-        def test_x_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE_1 = Rectangle(6, 7, "Miguel")
-
-        def test_y_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE_1 = Rectangle(6, 7, 2, "what")
-
-        def test_width_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(-6, 7)
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(0, 7)
-
-        def test_height_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(1, -1)
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(1, 0)
-
-        def test_x_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(1, 1, -4)
-
-        def test_y_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Rectangle(1, 1, 0, -1)
-
-        def setUp(self):
-
-                self.rec = Rectangle(5, 6, id=100)
-
-        def test_width(self):
-
-                self.assertEqual(self.rec.width, 5)
-
-        def test_height(self):
-
-                self.assertEqual(self.rec.height, 6)
-
-        def test_x(self):
-
-                self.assertEqual(self.rec.x, 0)
-
-        def test_y(self):
-
-                self.assertEqual(self.rec.y, 0)
-
-        def test_id(self):
-
-                self.assertEqual(self.rec.id, 100)
-
-        def test_set_get_width(self):
-
-                self.rec.width = 12
-                self.assertEqual(self.rec.width, 12)
-                with self.assertRaises(ValueError):
-                        self.rec.width = 0
-                with self.assertRaises(TypeError):
-                        self.rec.width = "DILL"
-
-        def test_set_get_height(self):
-
-                self.rec.height = 15
-                self.assertEqual(self.rec.height, 15)
-                with self.assertRaises(ValueError):
-                        self.rec.height = 0
-                with self.assertRaises(TypeError):
-                        self.rec.height = "DILL"
-
-        def test_set_get_x(self):
-
-                self.rec.x = 8
-                self.assertEqual(self.rec.x, 8)
-                with self.assertRaises(ValueError):
-                        self.rec.x = -1
-                with self.assertRaises(TypeError):
-                        self.rec.x = "DILL"
-
-        def test_set_get_y(self):
-
-                self.rec.y = 6
-                self.assertEqual(self.rec.y, 6)
-                with self.assertRaises(ValueError):
-                        self.rec.y = -12
-                with self.assertRaises(TypeError):
-                        self.rec.y = "DILL"
-
-
-class TestRectangleMethods(unittest.TestCase):
-
-        def setUp(self):
-
-                self.rec2 = Rectangle(5, 6, 1, 3, id=101)
-
-        def test_method_area(self):
-
-                self.assertEqual(self.rec2.area(), 30)
-
-        def test_method_desplay(self):
-
-                self.assertIsNone(self.rec2.display())
-
-        def test_method__str__(self):
-
-                self.assertEqual(
-                        self.rec2.__str__(), "[Rectangle] (101) 1/3 - 5/6")
-
-        def test_method_update(self):
-
-                self.rec2.update(101, 7, 6, 1, 2)
-
-                self.assertEqual(self.rec2.id, 101)
-                self.assertEqual(self.rec2.width, 7)
-                self.assertEqual(self.rec2.height, 6)
-                self.assertEqual(self.rec2.x, 1)
-                self.assertEqual(self.rec2.y, 2)
-
-                with self.assertRaises(TypeError):
-                        self.rec2.update(101, "width", 3, 5, 6)
-
-                with self.assertRaises(ValueError):
-                        self.rec2.update(101, 4, 3, -5, 6)
-
-        def test_method_update_v2(self):
-
-                self.rec2.update(height=17, width=4, y=1, x=1, id=50)
-
-                self.assertEqual(self.rec2.id, 50)
-                self.assertEqual(self.rec2.width, 4)
-                self.assertEqual(self.rec2.height, 17)
-                self.assertEqual(self.rec2.x, 1)
-                self.assertEqual(self.rec2.y, 1)
-
-                with self.assertRaises(TypeError):
-                        self.rec2.update(width="width")
-
-                with self.assertRaises(ValueError):
-                        self.rec2.update(width=0)
-
-        def test_method_to_dict(self):
-
-                self.assertEqual(type(self.rec2.to_dictionary()), dict)
-
-        def test_create(self):
-
-                r1_dictionary = self.rec2.to_dictionary()
-                r2 = Rectangle.create(**r1_dictionary)
-                self.assertIsInstance(r2, Rectangle)
-
-if __name__ == '__main__':
-        unittest.main()
+from io import StringIO
+from contextlib import redirect_stdout
+from models import rectangle
+Rectangle = rectangle.Rectangle
+
+
+class TestPep8(unittest.TestCase):
+    """Pep8 models/rectangle.py & tests/test_models/test_rectangle.py"""
+    def test_pep8(self):
+        """Pep8"""
+        style = pep8.StyleGuide(quiet=False)
+        errors = 0
+        files = ["models/rectangle.py", "tests/test_models/test_rectangle.py"]
+        errors += style.check_files(files).total_errors
+        self.assertEqual(errors, 0, 'Need to fix Pep8')
+
+
+class TestBase(unittest.TestCase):
+    """Tests for models/rectangle.py"""
+
+    """Test attributes"""
+    def test_all_attr_given(self):
+        """Test all attributes match what's given"""
+        r1 = Rectangle(10, 20, 1, 2, 99)
+        self.assertTrue(r1.width == 10)
+        self.assertTrue(r1.height == 20)
+        self.assertTrue(r1.x == 1)
+        self.assertTrue(r1.y == 2)
+        self.assertTrue(r1.id == 99)
+
+    def test_default_attr(self):
+        """Test default attributes are set when not given"""
+        r2 = Rectangle(3, 4)
+        self.assertTrue(r2.width == 3)
+        self.assertTrue(r2.height == 4)
+        self.assertTrue(r2.x == 0)
+        self.assertTrue(r2.y == 0)
+        self.assertTrue(r2.id is not None)
+
+    def test_attr_validated(self):
+        """Test attributes are validated before set"""
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Rectangle("10", 1, 1, 1, 1)
+            Rectangle([10, 3], 1, 1, 1, 1)
+        with self.assertRaisesRegex(TypeError, "height must be an integer"):
+            Rectangle(1, {20, }, 1, 1, 1)
+            Rectangle(1, {"d": 20}, 1, 1, 1)
+        with self.assertRaisesRegex(TypeError, "x must be an integer"):
+            Rectangle(1, 1, None, 1, 1)
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            Rectangle(1, 1, 1, (30, 20), 1)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Rectangle(0, 1, 1, 1, 1)
+        with self.assertRaisesRegex(ValueError, "height must be > 0"):
+            Rectangle(1, -20, 1, 1, 1)
+        with self.assertRaisesRegex(ValueError, "x must be >= 0"):
+            Rectangle(1, 1, -1, 1, 1)
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            Rectangle(1, 1, 1, -99, 1)
+
+    def test_private_attr_access(self):
+        """Test private attributes are not accessible"""
+        with self.assertRaises(AttributeError):
+            print(Rectangle.__width)
+            print(Rectangle.__height)
+            print(Rectangle.__x)
+            print(Rectangle.__y)
+
+    """Test args given"""
+    def test_invalid_args(self):
+        """Test too many args given throws error"""
+        with self.assertRaises(TypeError):
+            Rectangle(1, 2, 3, 4, 5, 6, 7)
+        """Test too little args given throws error"""
+        with self.assertRaises(TypeError):
+            Rectangle(1)
+            Rectangle()
+            Rectangle(None)
+
+    """Test class"""
+    def test_class(self):
+        """Test class created is indeed Rectangle"""
+        self.assertEqual(type(Rectangle(1, 2)), Rectangle)
+
+    """Test methods"""
+    def test_area(self):
+        """Test method: area"""
+        self.assertEqual(Rectangle(3, 4).area(), 12)
+        self.assertEqual(Rectangle(8, 7, 0, 0).area(), 56)
+        self.assertEqual(Rectangle(8, 7, 0, 0, 12).area(), 56)
+
+    def test_display(self):
+        """Test method: display"""
+        with StringIO() as bufr, redirect_stdout(bufr):
+            Rectangle(5, 3).display()
+            b = bufr.getvalue()
+        self.assertEqual(b, '#####\n#####\n#####\n')
+        with StringIO() as bufr, redirect_stdout(bufr):
+            Rectangle(5, 3, 1, 2).display()
+            b = bufr.getvalue()
+        self.assertEqual(b, '\n\n #####\n #####\n #####\n')
+
+    def test_print(self):
+        """Test method: __str__"""
+        r = Rectangle(1, 2, 3, 4, 5)
+        self.assertEqual(str(r), '[Rectangle] (5) 3/4 - 1/2')
+
+    def test_update(self):
+        """Test method: update(*args)"""
+        r = Rectangle(1, 2, 3, 4, 5)
+        r.update(10, 10, 10, 10, 10)
+        self.assertEqual(str(r), '[Rectangle] (10) 10/10 - 10/10')
+        r.update()
+        self.assertEqual(str(r), '[Rectangle] (10) 10/10 - 10/10')
+        r.update(99)
+        self.assertEqual(str(r), '[Rectangle] (99) 10/10 - 10/10')
+        r.update(99, 1)
+        self.assertEqual(str(r), '[Rectangle] (99) 10/10 - 1/10')
+        r.update(99, 1, 2)
+        self.assertEqual(str(r), '[Rectangle] (99) 10/10 - 1/2')
+        r.update(99, 1, 2, 3, 4)
+        self.assertEqual(str(r), '[Rectangle] (99) 3/4 - 1/2')
+        """Test invalid *args"""
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            r.update(99, 1, 2, 3, "string")
+        with self.assertRaisesRegex(ValueError, "y must be >= 0"):
+            r.update(99, 1, 2, 3, -99)
+        """Test method: update(*kwargs)"""
+        r.update(id=55)
+        self.assertEqual(str(r), '[Rectangle] (55) 3/4 - 1/2')
+        r.update(id=44, x=770, y=880, width=990)
+        self.assertEqual(str(r), '[Rectangle] (44) 770/880 - 990/2')
+        """Test mixture of valid and invalid *kwargs"""
+        r.update(nokey=1000, invalid=2000, testing=3000, id=4000)
+        self.assertEqual(str(r), '[Rectangle] (4000) 770/880 - 990/2')
+
+    def test_to_dictionary(self):
+        """Test method: to_dictionary"""
+        rdic = Rectangle(1, 2, 3, 4, 5).to_dictionary()
+        self.assertEqual(type(rdic), dict)
+        r2 = Rectangle(10, 10)
+        r2.update(**rdic)
+        self.assertEqual(str(r2), '[Rectangle] (5) 3/4 - 1/2')

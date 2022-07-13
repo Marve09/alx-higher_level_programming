@@ -1,186 +1,127 @@
 #!/usr/bin/python3
+"""
+Unittest for Square Class
+# run with python3 -m unittest discover tests
+# run with python3 -m unittest tests/test_models/test_square.py
+"""
 
-from models.rectangle import Rectangle
-from models.square import Square
+
 import unittest
-
-
-class TestSquareId(unittest.TestCase):
-
-        def test_Square_id_1(self):
-
-                obj1 = Square(5)
-                self.assertEqual(obj1.id, 16)
-
-        def test_Square_id_2(self):
-
-                obj2 = Square(2)
-                self.assertEqual(obj2.id, 17)
-
-        def test_Square_id_negative(self):
-
-                obj2 = Square(8, id=-5)
-                self.assertEqual(obj2.id, -5)
-
-        def test_Square_id_any(self):
-
-                obj = Square(7, 0, 0, 90)
-                self.assertEqual(obj.id, 90)
-
-        def test_subclass(self):
-
-                self.assertTrue(issubclass(Square, Rectangle))
-
-
-class TestSquareValidation(unittest.TestCase):
-        def test_not_argument_Square(self):
-
-                with self.assertRaises(TypeError):
-                        obj = Square()
-
-        def test_more_than_five_argument(self):
-
-                with self.assertRaises(TypeError):
-                        obj = Square(3, 4, 3, 4, 4, 5)
-
-        def test_size_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE = Square("hola", 3)
-
-        def test_x_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE_1 = Square(6, "Miguel")
-
-        def test_y_type_error(self):
-
-                with self.assertRaises(TypeError):
-                        objE_1 = Square(6, 7, "what")
-
-        def test_size_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Square(-6)
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Square(0)
-
-        def test_x_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Square(1, -1, 4)
-
-        def test_y_value_error(self):
-
-                with self.assertRaises(ValueError):
-                        objE_1 = Square(1, 1, -1)
-
-        def setUp(self):
-
-                self.squ = Square(5, 6, id=100)
-
-        def test_size(self):
-
-                self.assertEqual(self.squ.size, 5)
-
-        def test_x(self):
-
-                self.assertEqual(self.squ.x, 6)
-
-        def test_y(self):
-
-                self.assertEqual(self.squ.y, 0)
-
-        def test_id(self):
-
-                self.assertEqual(self.squ.id, 100)
-
-        def test_set_get_size(self):
-
-                self.squ.size = 12
-                self.assertEqual(self.squ.size, 12)
-                with self.assertRaises(ValueError):
-                        self.squ.size = -1
-                with self.assertRaises(TypeError):
-                        self.squ.size = "DILL"
-
-        def test_set_get_x(self):
-
-                self.squ.x = 8
-                self.assertEqual(self.squ.x, 8)
-                with self.assertRaises(ValueError):
-                        self.squ.x = -1
-                with self.assertRaises(TypeError):
-                        self.squ.x = "DILL"
-
-        def test_set_get_y(self):
-
-                self.squ.y = 6
-                self.assertEqual(self.squ.y, 6)
-                with self.assertRaises(ValueError):
-                        self.squ.y = -12
-                with self.assertRaises(TypeError):
-                        self.squ.y = "DILL"
-
-
-class TestSquareMethods(unittest.TestCase):
-
-        def setUp(self):
-
-                self.squ2 = Square(5, 6, 1, id=101)
-
-        def test_method_area(self):
-
-                self.assertEqual(self.squ2.area(), 25)
-
-        def test_method_desplay(self):
-
-                self.assertIsNone(self.squ2.display())
-
-        def test_method__str__(self):
-
-                self.assertEqual(self.squ2.__str__(), "[Square] (101) 6/1 - 5")
-
-        def test_method_update(self):
-
-                self.squ2.update(101, 7, 1, 2)
-
-                self.assertEqual(self.squ2.id, 101)
-                self.assertEqual(self.squ2.size, 7)
-                self.assertEqual(self.squ2.x, 1)
-                self.assertEqual(self.squ2.y, 2)
-
-                with self.assertRaises(TypeError):
-                        self.squ2.update(101, "size", 3, 6)
-
-                with self.assertRaises(ValueError):
-                        self.squ2.update(101, 4, -5, 6)
-
-        def test_method_update_v2(self):
-
-                self.squ2.update(size=17, y=1, x=1, id=50)
-
-                self.assertEqual(self.squ2.id, 50)
-                self.assertEqual(self.squ2.size, 17)
-                self.assertEqual(self.squ2.x, 1)
-                self.assertEqual(self.squ2.y, 1)
-
-                with self.assertRaises(TypeError):
-                        self.squ2.update(size="size")
-
-                with self.assertRaises(ValueError):
-                        self.squ2.update(size=0)
-
-        def test_method_to_dict(self):
-
-                self.assertEqual(type(self.squ2.to_dictionary()), dict)
-
-        def test_create(self):
-
-                r1_dictionary = self.squ2.to_dictionary()
-                r2 = Rectangle.create(**r1_dictionary)
-                self.assertIsInstance(r2, Rectangle)
-
-if __name__ == '__main__':
-        unittest.main()
+import pep8
+from io import StringIO
+from contextlib import redirect_stdout
+from models import square
+Square = square.Square
+
+
+class TestPep8(unittest.TestCase):
+    """Pep8 models/square.py & tests/test_models/test_square.py"""
+    def test_pep8(self):
+        """Pep8"""
+        style = pep8.StyleGuide(quiet=False)
+        errors = 0
+        files = ["models/square.py", "tests/test_models/test_square.py"]
+        errors += style.check_files(files).total_errors
+        self.assertEqual(errors, 0, 'Need to fix Pep8')
+
+
+class TestBase(unittest.TestCase):
+    """Tests for models/square.py"""
+
+    """Test attributes"""
+    def test_all_attr_given(self):
+        """Test all attributes match what's given"""
+        s1 = Square(9, 99, 999, 1000)
+        self.assertTrue(s1.width == 9)
+        self.assertTrue(s1.height == 9)
+        self.assertTrue(s1.size == 9)
+        self.assertTrue(s1.x == 99)
+        self.assertTrue(s1.y == 999)
+        self.assertTrue(s1.id == 1000)
+
+    def test_default_attr(self):
+        """Test default attributes are set when not given"""
+        s2 = Square(88)
+        self.assertTrue(s2.width == 88)
+        self.assertTrue(s2.height == 88)
+        self.assertTrue(s2.size == 88)
+        self.assertTrue(s2.x == 0)
+        self.assertTrue(s2.y == 0)
+        self.assertTrue(s2.id is not None)
+
+    def test_attr_validated(self):
+        """Test attributes are validated before set"""
+        with self.assertRaisesRegex(TypeError, "width must be an integer"):
+            Square("10")
+            Square([10, 3])
+            Square({20, })
+            Square({"d": 20})
+            Square(None)
+            Square((30, 20), 4)
+        with self.assertRaisesRegex(ValueError, "width must be > 0"):
+            Square(-1)
+            Square(9).size(-9)
+
+    """Test args given"""
+    def test_invalid_args(self):
+        """Test too many args given throws error"""
+        with self.assertRaises(TypeError):
+            Square(1, 2, 3, 4, 5, 6, 7)
+        """Test too little args given throws error"""
+        with self.assertRaises(TypeError):
+            Square()
+            Square(None)
+
+    """Test class"""
+    def test_class(self):
+        """Test class created is indeed Rectangle"""
+        s = Square(10)
+        self.assertEqual(type(s), Square)
+
+    """Test methods"""
+    def test_area(self):
+        """Test method: area"""
+        self.assertEqual(Square(3).area(), 9)
+        self.assertEqual(Square(4, 0, 0).area(), 16)
+
+    def test_display(self):
+        """Test method: display"""
+        with StringIO() as bufr, redirect_stdout(bufr):
+            Square(4).display()
+            b = bufr.getvalue()
+        self.assertEqual(b, '####\n####\n####\n####\n')
+        with StringIO() as bufr, redirect_stdout(bufr):
+            Square(3, 1, 2).display()
+            b = bufr.getvalue()
+        self.assertEqual(b, '\n\n ###\n ###\n ###\n')
+
+    def test_print(self):
+        """Test method: __str__"""
+        s = Square(1, 2, 3, 44)
+        s.size = 500
+        self.assertEqual(str(s), '[Square] (44) 2/3 - 500')
+
+    def test_update(self):
+        """Test method: update(*args)"""
+        s = Square(1, 2, 3, 4)
+        s.update(10, 10, 10, 10)
+        self.assertEqual(str(s), '[Square] (10) 10/10 - 10')
+        s.update()
+        self.assertEqual(str(s), '[Square] (10) 10/10 - 10')
+        s.update(99)
+        self.assertEqual(str(s), '[Square] (99) 10/10 - 10')
+        s.update(99, 5)
+        self.assertEqual(str(s), '[Square] (99) 10/10 - 5')
+        s.update(44, 55, 1, 2)
+        self.assertEqual(str(s), '[Square] (44) 1/2 - 55')
+        """Test method: update(*kwargs)"""
+        s.update(id=88, size=77, nokey=99)
+        self.assertEqual(str(s), '[Square] (88) 1/2 - 77')
+
+    def test_to_dictionary(self):
+        """Test method: to_dictionary"""
+        sdic = Square(1, 2, 3, 4).to_dictionary()
+        self.assertEqual(type(sdic), dict)
+        s2 = Square(10, 10)
+        s2.update(**sdic)
+        self.assertEqual(str(s2), '[Square] (4) 2/3 - 1')

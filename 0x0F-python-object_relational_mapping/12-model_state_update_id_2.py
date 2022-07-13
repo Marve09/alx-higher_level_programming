@@ -1,27 +1,30 @@
 #!/usr/bin/python3
-"""Module 12_model_state_updata
 """
+update state: given id, change state name
+parameters given to script: username, password, database
+"""
+
 from sys import argv
 from model_state import Base, State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from re import search
+
 
 if __name__ == "__main__":
-    # Connection → mysql+mysqldb://<user>:<passwd>@<host>:<port>/<name_db>'
+
+    # make engine for database
     user = argv[1]
     passwd = argv[2]
     db = argv[3]
-
-    database_url = 'mysql+mysqldb://{}:{}@localhost:3360/{}'.format(
-        user, passwd, db)
-
-    engine = create_engine(database_url, pool_pre_ping=True)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
+                           format(user, passwd, db), pool_pre_ping=True)
     Base.metadata.create_all(engine)
-    session_basedata = sessionmaker(bind=engine)
-    init_basedata = session_basedata()
-    query = init_basedata.query(State).filter(
-        State.id == 2).update({State.name: "New Mexico"})
-    init_basedata.commit()
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    init_basedata.close()
+    # find and update state (run #7 to see table printed)
+    state = session.query(State).filter_by(id=2).first()
+    state.name = "New Mexico"
+
+    session.commit()
+    session.close()

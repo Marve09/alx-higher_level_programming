@@ -1,2 +1,4 @@
--- Script that lists all the tables of a database in your MySQL server.
-SHOW TABLES;
+-- list all tables in database passed as argument
+-- cat [filename] | mysql -hlocalhost -uroot -p mysql
+
+SHOW tables;

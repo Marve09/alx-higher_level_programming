@@ -1,27 +1,26 @@
 #!/usr/bin/python3
-"""Module 1_filter_states
 """
+return states starting with 'N'
+parameters given to script: username, password, database
+"""
+
 import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
 
-    username = argv[1]
-    password = argv[2]
-    database = argv[3]
-
+    # connect to database
     db = MySQLdb.connect(host="localhost",
                          port=3306,
-                         user=username,
-                         passwd=password,
-                         db=database,
-                         charset="utf8")
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
 
-    query = db.cursor()
-
-    query.execute(
-        'SELECT * FROM states WHERE name LIKE BINARY "N%" ORDER BY id ASC;')
-    for row in query.fetchall():
-        print(row)
-    query.close()
+    # create cursor to exec queries using SQL; filter names starting with 'N'
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+    for row in cursor.fetchall():
+        if row[1][0] == 'N':
+            print(row)
+    cursor.close()
     db.close()
